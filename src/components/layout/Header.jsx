@@ -36,6 +36,10 @@ const Header = () => {
               Menu
             </Link>
             
+            <Link to="/orders" className="text-gray-700 hover:text-blue-600">
+              Orders
+            </Link>
+            
             <Link to="/cart" className="flex items-center gap-2 text-gray-700 hover:text-blue-600 relative">
               <ShoppingCart size={20} />
               {cartItemsCount > 0 && (

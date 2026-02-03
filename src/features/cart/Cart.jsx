@@ -1,8 +1,10 @@
 import { ShoppingCart, Plus, Minus, Trash2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useCart, useUpdateCart, useRemoveFromCart } from './cart.hooks';
 import { useCartSocket } from './cart.socket.hook';
 
 const Cart = () => {
+  const navigate = useNavigate();
   const { data: cart, isLoading } = useCart();
   const updateCartMutation = useUpdateCart();
   const removeFromCartMutation = useRemoveFromCart();
@@ -19,6 +21,10 @@ const Cart = () => {
 
   const handleRemove = (menuId) => {
     removeFromCartMutation.mutate(menuId);
+  };
+
+  const handleCheckout = () => {
+    navigate('/checkout');
   };
 
   if (isLoading) {
@@ -94,7 +100,10 @@ const Cart = () => {
           <span>Total:</span>
           <span>₹{cart.totalAmount?.toFixed(2) || '0.00'}</span>
         </div>
-        <button className="w-full mt-4 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 font-semibold">
+        <button 
+          onClick={handleCheckout}
+          className="w-full mt-4 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 font-semibold"
+        >
           Proceed to Checkout
         </button>
       </div>
